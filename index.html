@@ -1,143 +1,440 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fatima Keskin: Her Journey</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        /* Apply Inter font globally */
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        /* Style for active nav link (optional JS needed for dynamic update on scroll) */
-        .nav-active {
-            font-weight: 700;
-            /* Add other active styles */
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Şeyma Keskin | Yoga & Mindfulness</title>
+
+  <!-- Tailwind CSS + Dark Mode Config -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class'
+    }
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: #1c1917;
+    }
+    nav a {
+      text-decoration: none;
+      color: #5b21b6;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #7e22ce;
+    }
+
+    /* Dark Mode Renkleri – Uyumlu ve Estetik */
+html.dark body {
+  background-color: #0f172a; /* slate-900 */
+  color: #e2e8f0; /* slate-200 */
+}
+
+html.dark .bg-stone-50 { background-color: #1e293b; } /* slate-800 */
+html.dark .text-stone-800 { color: #f1f5f9; } /* slate-100 */
+
+html.dark .bg-white { background-color: #1e293b; color: #f1f5f9; } /* slate-800 → slate-100 */
+html.dark .text-purple-900 { color: #c4b5fd; } /* violet-300 */
+html.dark .text-amber-600 { color: #fde047; } /* yellow-300 */
+html.dark .text-indigo-600 { color: #818cf8; } /* indigo-300 */
+
+html.dark .bg-amber-50 { background-color: #292524; } /* stone-800 (amber’e uyumlu koyu) */
+html.dark .bg-indigo-50 { background-color: #1e1b4b; } /* indigo-900 */
+html.dark .bg-purple-50 { background-color: #2e1065; } /* purple-900 */
+
+html.dark .text-amber-100 { color: #fde68a; } /* yellow-200 */
+html.dark .text-amber-200 { color: #fcd34d; } /* yellow-300 */
+html.dark .text-amber-300 { color: #fbbf24; } /* yellow-400 */
+
+/* Buton ve vurgu renkleri – orijinal Tailwind dark tonlarıyla uyumlu */
+html.dark .bg-amber-500 { background-color: #f59e0b; } /* amber-500 (dark'ta da aynı kalabilir) */
+html.dark .bg-indigo-600 { background-color: #4f46e5; } /* indigo-600 */
+html.dark .bg-purple-600 { background-color: #7e22ce; } /* purple-600 */
+  </style>
 </head>
-<body class="bg-amber-50 text-stone-800 antialiased">
+<body class="bg-stone-50 text-stone-800 antialiased">
 
-    <header class="bg-white/80 backdrop-blur-sm sticky top-0 z-50 shadow-sm">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#home" class="text-xl font-bold text-stone-700 hover:text-orange-700 transition duration-300">Fatima Keskin's Journey</a>
+  <!-- Header -->
+  <header class="bg-white/90 backdrop-blur-sm sticky top-0 z-50 shadow-sm">
+    <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <div class="flex items-center space-x-3">
+        <img 
+  src="https://i.pinimg.com/1200x/b3/7e/a7/b37ea76b4617f9db668ad71fbc47afd7.jpg"
+  loading="lazy"
+  alt="Şeyma Keskin - Yoga"
+  class="w-10 h-10 rounded-full object-cover"
+/>
+        <a href="#home" class="text-xl font-bold text-purple-900 hover:text-amber-600 transition">Şeyma Keskin</a>
+      </div>
+      <ul class="hidden md:flex space-x-6">
+        <li><a href="#about" data-lang="nav_about">Hakkımda</a></li>
+        <li><a href="#yoga-journey" data-lang="nav_yoga_journey">Yoga Yolculuğum</a></li>
+        <li><a href="#kids" data-lang="nav_kids">Çocuklara Yoga</a></li>
+        <li><a href="#programs" data-lang="nav_programs">Programlar</a></li>
+        <li><a href="#blog" data-lang="nav_blog">Makaleler</a></li>
+      </ul>
+      <div class="flex items-center space-x-4">
+        <select id="language-switcher" class="bg-white border border-purple-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 dark:bg-slate-800 dark:text-slate-200 dark:border-purple-500">
+          <option value="tr">Türkçe</option>
+          <option value="en">English</option>
+        </select>
+        <button id="theme-toggle" class="p-2 rounded-full bg-white text-purple-700 hover:bg-amber-100 focus:outline-none focus:ring-2 focus:ring-amber-500 dark:bg-slate-800 dark:text-amber-300">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" id="theme-icon">
+            <!-- Default: sun (light mode) -->
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+        </button>
+      </div>
+    </nav>
+  </header>
 
-            <ul class="flex space-x-6">
-                <li><a href="#home" class="text-stone-600 hover:text-orange-700 transition duration-300">Welcome</a></li>
-                <li><a href="#journey" class="text-stone-600 hover:text-orange-700 transition duration-300">Journey</a></li>
-                <li><a href="#faith" class="text-stone-600 hover:text-orange-700 transition duration-300">Faith</a></li>
-                <li><a href="#passions" class="text-stone-600 hover:text-orange-700 transition duration-300">Passions</a></li>
-            </ul>
-        </nav>
-    </header>
+  <!-- Hero Section -->
+  <section id="home" class="relative min-h-screen flex items-center justify-center py-20 px-6">
+    <div class="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
+      style="background-image: url('https://i.pinimg.com/1200x/b3/7e/a7/b37ea76b4617f9db668ad71fbc47afd7.jpg'); background-position: 50% 40%;">
+    </div>
+    <div class="absolute inset-0 bg-black/50 z-10"></div>
+    <div class="container mx-auto text-center relative z-20 max-w-4xl">
+      <h1 class="text-4xl md:text-5xl font-bold text-white mb-4" data-lang="hero_title">Merhaba, ben Şeyma</h1>
+      <p class="text-lg md:text-xl text-amber-100 mb-8" data-lang="hero_subtitle">
+        Yoga eğitmeni, meditasyon rehberi ve çocukların farkındalık yolculuğuna eşlik eden bir dostum.
+      </p>
+      <a href="#programs" class="inline-block bg-amber-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-amber-600 transition shadow-lg" data-lang="hero_cta">
+        Programlara Göz At
+      </a>
+    </div>
+  </section>
 
-    <main>
-
-        <section id="home" class="min-h-screen flex items-center bg-gradient-to-b from-amber-100 via-amber-50 to-amber-50 py-20 px-6">
-            <div class="container mx-auto text-center">
-                <img src="https://placehold.co/150x150/eab308/ffffff?text=FK" alt="Initials Placeholder" class="mx-auto mb-8 rounded-full shadow-lg" onerror="this.onerror=null; this.src='https://placehold.co/150x150/eab308/ffffff?text=Welcome';">
-                <h1 class="text-4xl md:text-5xl font-bold text-stone-800 mb-4">Namaste. Welcome to Fatima Keskin's Space.</h1>
-                <p class="text-lg md:text-xl text-stone-700 max-w-3xl mx-auto mb-8">
-                    Pull up a chair, the coffee's brewing. This site celebrates the journey, faith, and passions of Fatima Keskin. A space dedicated to warmth, reflection, and the things that bring her joy.
-                </p>
-                <a href="#journey" class="inline-block bg-orange-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-orange-700 transition duration-300 shadow-md">Explore Her Story</a>
-            </div>
-        </section>
-
-        <section id="journey" class="py-20 px-6 bg-white">
-            <div class="container mx-auto grid md:grid-cols-2 gap-12 items-center">
-                <div class="order-2 md:order-1">
-                    <img src="https://placehold.co/600x400/fbbf24/ffffff?text=Istanbul+Silhouette" alt="Symbolic image of Istanbul or a path forward" class="rounded-lg shadow-xl w-full h-auto object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x400/fbbf24/ffffff?text=Journey';">
-                </div>
-                <div class="order-1 md:order-2">
-                    <h2 class="text-3xl md:text-4xl font-bold text-stone-800 mb-6">Her Path: A Journey of Faith</h2>
-                    <p class="text-stone-700 mb-4 leading-relaxed">
-                        Every life is a unique tapestry. Fatima's journey began in the vibrant district of Besiktas, Istanbul, and has been woven with threads of experience, challenge, and growth. This space honours her personal path, marked by resilience and transformation.
-                    </p>
-                    <p class="text-stone-700 mb-4 leading-relaxed">
-                        Central to her present is a deep and abiding Christian faith, a source of comfort, guidance, and unwavering hope. It shapes her perspective, fuels her kindness, and illuminates her days.
-                    </p>
-                    <p class="text-stone-700 leading-relaxed">
-                        While acknowledging the past that has shaped her, the focus here is on the vibrant present and the hopeful future, celebrating the wonderful person she is today.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <section id="faith" class="py-20 px-6 bg-amber-50">
-            <div class="container mx-auto grid md:grid-cols-2 gap-12 items-center">
-                 <div>
-                    <h2 class="text-3xl md:text-4xl font-bold text-stone-800 mb-6">Rooted in Faith</h2>
-                    <p class="text-stone-700 mb-4 leading-relaxed">
-                        Her Christian faith is not just a belief system, but a living foundation that permeates her daily life. It's found in quiet moments of reflection, in acts of service, and in the grace she extends to others.
-                    </p>
-                    <p class="text-stone-700 mb-4 leading-relaxed">
-                        It provides a lens through which to view the world – one of hope, forgiveness, and love. It's the anchor that holds steady through changing tides and the light that guides her way.
-                    </p>
-                    <p class="text-stone-700 italic leading-relaxed">
-                        (Optional: Consider adding a favorite Bible verse or a short personal reflection here, with her permission).
-                    </p>
-                </div>
-                 <div>
-                     <img src="https://placehold.co/600x400/f59e0b/ffffff?text=Light+Through+Window" alt="Symbolic image of light or peace" class="rounded-lg shadow-xl w-full h-auto object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x400/f59e0b/ffffff?text=Faith';">
-                 </div>
-            </div>
-        </section>
-
-        <section id="passions" class="py-20 px-6 bg-white">
-            <div class="container mx-auto">
-                <h2 class="text-3xl md:text-4xl font-bold text-stone-800 mb-12 text-center">The Spice of Life: Passions & Pleasures</h2>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 justify-items-center">
-
-                    <div class="bg-amber-50 p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 w-full">
-                        <img src="https://placehold.co/400x300/fdba74/ffffff?text=Eggs+with+Onions" alt="Delicious breakfast spread, perhaps featuring eggs" class="rounded-md mb-4 w-full h-48 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/fdba74/ffffff?text=Breakfast';">
-                        <h3 class="text-2xl font-bold text-stone-700 mb-3">The Art of Breakfast</h3>
-                        <p class="text-stone-600 leading-relaxed">
-                            There's a special kind of magic in starting the day right. She possesses a wonderful talent for crafting delicious breakfasts, especially her perfectly made eggs with onions! It's an expression of care and a delightful way to begin the day.
-                        </p>
-                    </div>
-
-                    <div class="bg-amber-50 p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 w-full">
-                        <img src="https://placehold.co/400x300/fb923c/ffffff?text=Music+Notes" alt="Abstract music representation" class="rounded-md mb-4 w-full h-48 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/fb923c/ffffff?text=Music';">
-                        <h3 class="text-2xl font-bold text-stone-700 mb-3">Music for the Soul: Shakira</h3>
-                        <p class="text-stone-600 leading-relaxed">
-                            Music moves us, and the vibrant rhythms and heartfelt lyrics of Shakira resonate deeply. Her music brings energy, joy, and a soundtrack to many moments. Hips don't lie, and good music speaks volumes!
-                        </p>
-                    </div>
-
-                    <div class="bg-amber-50 p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 w-full">
-                        <img src="https://placehold.co/400x300/f97316/ffffff?text=Dondurma+Ice+Cream" alt="Turkish Dondurma ice cream" class="rounded-md mb-4 w-full h-48 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/f97316/ffffff?text=Dondurma';">
-                        <h3 class="text-2xl font-bold text-stone-700 mb-3">A Sweet Treat: Dondurma</h3>
-                        <p class="text-stone-600 leading-relaxed">
-                            Simple pleasures are often the best. A fondness for dondurma – that unique, chewy Turkish ice cream – is a delightful quirk. It's a taste of sweetness and perhaps a reminder of fun experiences.
-                        </p>
-                    </div>
-
-                    <div class="bg-amber-50 p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 w-full sm:col-span-1 lg:col-span-1">
-                        <img src="https://placehold.co/400x300/d97706/ffffff?text=Sparkling+Clean" alt="Sparkling clean space" class="rounded-md mb-4 w-full h-48 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x300/d97706/ffffff?text=Cleanliness';">
-                        <h3 class="text-2xl font-bold text-stone-700 mb-3">The Joy of Tidiness</h3>
-                        <p class="text-stone-600 leading-relaxed">
-                            Finding peace and satisfaction in a clean and orderly space is a special kind of joy. She appreciates the calm that comes with tidiness and enjoys the process of making things sparkle.
-                        </p>
-                    </div>
-
-                 </div>
-            </div>
-        </section>
-
-    </main>
-
-    <footer class="bg-stone-800 text-amber-100 py-8 px-6 mt-1">
-        <div class="container mx-auto text-center">
-            <p>&copy; 2025 | Fatima Keskin's Journey</p>
-            <p class="text-sm text-stone-400 mt-2">Created with care.</p>
+  <!-- Hakkımda -->
+  <section id="about" class="py-20 px-6 bg-white dark:bg-slate-800">
+    <div class="container mx-auto max-w-5xl">
+      <h2 class="text-3xl md:text-4xl font-bold text-purple-900 dark:text-violet-300 mb-8 text-center" data-lang="about_title">Hakkımda</h2>
+      <div class="grid md:grid-cols-2 gap-10 items-center">
+        <div>
+          <p class="mb-4 leading-relaxed" data-lang="about_p1">
+            İstanbul’da doğdum ve büyüdüm. Hayatımın erken dönemlerinde stres, hız ve dışa dönüklük beni tüketmeye başladı.
+            İçime dönmem gerektiğini hissettiğim o dönemde yoga ile tanıştım — ve bu buluşma hayatıma yön verdi.
+          </p>
+          <p class="mb-4 leading-relaxed" data-lang="about_p2">
+            Bugün, yoga sadece bir egzersiz değil; nefesle barışmak, bedenle dans etmek ve zihni sakinleştirmek için bir yaşam felsefesi.
+          </p>
         </div>
-    </footer>
+        <img 
+          src="https://i.pinimg.com/1200x/b3/7e/a7/b37ea76b4617f9db668ad71fbc47afd7.jpg" 
+          alt="Şeyma yoga yapıyor"
+          class="rounded-xl shadow-md object-cover w-full h-80"
+        />
+      </div>
+    </div>
+  </section>
 
-    </body>
+  <!-- Yoga Yolculuğum -->
+  <section id="yoga-journey" class="py-20 px-6 bg-indigo-50 dark:bg-slate-900">
+    <div class="container mx-auto max-w-5xl">
+      <h2 class="text-3xl md:text-4xl font-bold text-purple-900 dark:text-violet-300 mb-8 text-center" data-lang="journey_title">Yoga ile Tanışmam</h2>
+      <p class="text-lg mb-6 text-center max-w-3xl mx-auto" data-lang="journey_intro">
+        2015 yılında ilk kez bir yoga matına oturdum. O gün, sadece esnemek için gitmiştim… ama içimde bir şey değişti.
+      </p>
+      <div class="grid md:grid-cols-2 gap-8 mt-10">
+        <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm">
+          <h3 class="text-xl font-semibold text-indigo-700 dark:text-indigo-300 mb-3" data-lang="trainings_title">EĞİTİMLERİM</h3>
+          <ul class="list-disc pl-5 space-y-2 text-stone-700 dark:text-slate-300" data-lang="trainings_list">
+            <li>RYT 200 (Registered Yoga Teacher)</li>
+            <li>Çocuklara Yoga Sertifikası</li>
+            <li>Mindfulness & Meditasyon Eğitmenliği</li>
+            <li>Anatomi ve Fizyoloji Sertifikası</li>
+          </ul>
+        </div>
+        <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm">
+          <h3 class="text-xl font-semibold text-amber-600 dark:text-yellow-300 mb-3" data-lang="breath_title">NEFESİN GÜCÜNE İNANIYORUM</h3>
+          <p class="text-stone-700 dark:text-slate-300" data-lang="breath_text">
+            Her dersimde, öğrencilerime sadece asana değil; farkındalık,pinimg nefes bilgisi ve içsel huzuru aktarmaya çalışıyorum.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Çocuklara Yoga -->
+  <section id="kids" class="py-20 px-6 bg-purple-50 dark:bg-slate-900">
+    <div class="container mx-auto max-w-5xl text-center">
+      <h2 class="text-3xl md:text-4xl font-bold text-purple-900 dark:text-violet-300 mb-6" data-lang="kids_title">Çocuklara Yoga</h2>
+      <p class="text-lg mb-8 max-w-3xl mx-auto" data-lang="kids_desc">
+        4-12 yaş arası çocuklar için özel tasarlanmış yoga programlarım, oyun, hikâye ve nefes egzersizleriyle dikkat, özgüven ve bedensel farkındalığı geliştirir.
+      </p>
+      <img 
+  src="https://i.pinimg.com/1200x/04/aa/0f/04aa0f0b1c0e9b73d4721c7a4b709f8d.jpg"
+  alt="Çocuklarla yoga"
+  loading="lazy"
+  class="mx-auto rounded-xl shadow-md mb-6 w-full max-w-2xl h-auto"
+/>
+      <a href="#programs" class="inline-block bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition" data-lang="kids_cta">
+        Çocuk Programları
+      </a>
+    </div>
+  </section>
+
+  <!-- Programlar -->
+  <section id="programs" class="py-20 px-6 bg-white dark:bg-slate-800">
+    <div class="container mx-auto max-w-6xl">
+      <h2 class="text-3xl md:text-4xl font-bold text-purple-900 dark:text-violet-300 mb-12 text-center" data-lang="programs_title">Şeyma ile Yoga: Programlar</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-indigo-50 dark:bg-slate-700 p-6 rounded-xl border border-indigo-100 dark:border-slate-600 hover:shadow-md transition">
+          <h3 class="text-xl font-bold text-indigo-800 dark:text-indigo-200 mb-3" data-lang="prog1_title">Online Grup Dersleri</h3>
+          <p class="mb-4" data-lang="prog1_desc">Haftalık canlı dersler — sabah enerjisi veya akşam sakinliği.</p>
+          <p class="font-semibold text-amber-600 dark:text-yellow-300" data-lang="prog1_price">₺299/ay</p>
+          <button class="mt-4 w-full py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700" data-lang="prog1_btn">Katıl</button>
+        </div>
+        <div class="bg-amber-50 dark:bg-slate-700 p-6 rounded-xl border border-amber-100 dark:border-slate-600 hover:shadow-md transition">
+          <h3 class="text-xl font-bold text-amber-800 dark:text-yellow-200 mb-3" data-lang="prog2_title">Bireysel Oturumlar</h3>
+          <p class="mb-4" data-lang="prog2_desc">Kişiselleştirilmiş planlar, yaralanma sonrası rehabilitasyon.</p>
+          <p class="font-semibold text-amber-600 dark:text-yellow-300" data-lang="prog2_price">₺450/oturum</p>
+          <button class="mt-4 w-full py-2 bg-amber-500 text-white rounded-lg hover:bg-amber-600" data-lang="prog2_btn">Rezervasyon</button>
+        </div>
+        <div class="bg-purple-50 dark:bg-slate-700 p-6 rounded-xl border border-purple-100 dark:border-slate-600 hover:shadow-md transition">
+          <h3 class="text-xl font-bold text-purple-800 dark:text-violet-200 mb-3" data-lang="prog3_title">Meditasyon & Nefes Paketi</h3>
+          <p class="mb-4" data-lang="prog3_desc">4 haftalık rehberli meditasyon + nefes egzersizleri.</p>
+          <p class="font-semibold text-amber-600 dark:text-yellow-300" data-lang="prog3_price">₺399</p>
+          <button class="mt-4 w-full py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700" data-lang="prog3_btn">Satın Al</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog / Makaleler -->
+  <section id="blog" class="py-20 px-6 bg-indigo-50 dark:bg-slate-900">
+    <div class="container mx-auto max-w-5xl">
+      <h2 class="text-3xl md:text-4xl font-bold text-purple-900 dark:text-violet-300 mb-8 text-center" data-lang="blog_title">Yoga & Farkındalık Yazıları</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <a href="#" class="block bg-white dark:bg-slate-800 p-5 rounded-lg shadow-sm hover:shadow-md transition">
+          <h3 class="font-bold text-lg text-indigo-700 dark:text-indigo-300" data-lang="article1_title">Sabah Nefes Egzersizleri</h3>
+          <p class="mt-2 text-stone-600 dark:text-slate-400" data-lang="article1_desc">Günü enerjiyle başlatmanın 5 yolu.</p>
+        </a>
+        <a href="#" class="block bg-white dark:bg-slate-800 p-5 rounded-lg shadow-sm hover:shadow-md transition">
+          <h3 class="font-bold text-lg text-indigo-700 dark:text-indigo-300" data-lang="article2_title">Çocuklarda Dikkat Dağınıklığı ve Yoga</h3>
+          <p class="mt-2 text-stone-600 dark:text-slate-400" data-lang="article2_desc">Oyunla farkındalık nasıl kazandırılır?</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- İletişim & Sosyal Medya -->
+<section id="contact" class="py-20 px-6 bg-white dark:bg-slate-800">
+  <div class="container mx-auto max-w-4xl text-center">
+    <h2 class="text-3xl md:text-4xl font-bold text-purple-900 dark:text-violet-300 mb-8">İletişime Geçin</h2>
+    <div class="grid md:grid-cols-3 gap-8">
+      <!-- Telefon -->
+      <div class="p-6 rounded-xl bg-indigo-50 dark:bg-slate-700">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto text-indigo-600 dark:text-indigo-300 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+        </svg>
+        <p class="font-semibold text-stone-800 dark:text-slate-200">Telefon</p>
+        <a href="tel:+905333716155" class="text-indigo-600 hover:text-indigo-800 dark:text-indigo-300 dark:hover:text-indigo-100 transition">0533 371 61 55</a>
+      </div>
+
+      <!-- E-posta -->
+      <div class="p-6 rounded-xl bg-amber-50 dark:bg-slate-700">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto text-amber-600 dark:text-yellow-300 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
+        <p class="font-semibold text-stone-800 dark:text-slate-200">E-posta</p>
+        <a href="mailto:seyma.keskin@hotmail.com" class="text-amber-600 hover:text-amber-800 dark:text-yellow-300 dark:hover:text-yellow-100 transition">seyma.keskin@hotmail.com</a>
+      </div>
+
+      <!-- Instagram -->
+      <div class="p-6 rounded-xl bg-purple-50 dark:bg-slate-700">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mx-auto text-purple-600 dark:text-violet-300 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h16a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+        <p class="font-semibold text-stone-800 dark:text-slate-200">Instagram</p>
+        <a href="https://instagram.com/dopeseyma" target="_blank" rel="noopener noreferrer" class="text-purple-600 hover:text-purple-800 dark:text-violet-300 dark:hover:text-violet-100 transition">@dopeseyma</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- Footer -->
+  <footer class="bg-purple-900 text-amber-50 py-10 px-6 dark:bg-slate-900 dark:text-amber-200">
+  <div class="container mx-auto text-center">
+    <p class="text-xl font-semibold mb-2" data-lang="footer_name">Şeyma Keskin</p>
+    <p class="text-amber-200 dark:text-amber-300 mb-4" data-lang="footer_tagline">Yoga • Meditasyon • Farkındalık</p>
+
+    <!-- Sosyal Medya İkonları -->
+    <div class="flex justify-center space-x-4 mb-6">
+      <a href="https://instagram.com/dopeseyma" target="_blank" rel="noopener noreferrer" class="text-amber-100 hover:text-white transition">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+        </svg>
+      </a>
+    </div>
+
+    <p class="mt-6 text-sm text-amber-300 dark:text-amber-400">© 2025 Tüm hakları saklıdır.</p>
+  </div>
+</footer>
+
+  <!-- JavaScript: Dil ve Tema Yönetimi -->
+  <script>
+    const translations = {
+      en: {
+        nav_about: "About",
+        nav_yoga_journey: "My Yoga Journey",
+        nav_kids: "Kids Yoga",
+        nav_programs: "Programs",
+        nav_blog: "Blog",
+        hero_title: "Hi, I'm Şeyma",
+        hero_subtitle: "Yoga teacher, meditation guide, and a friend to children on their mindfulness journey.",
+        hero_cta: "Explore Programs",
+        about_title: "About Me",
+        about_p1: "I was born and raised in Istanbul. In my early years, stress, speed, and extroversion began to consume me. During that time, I felt the need to turn inward—and that’s when I met yoga, a turning point in my life.",
+        about_p2: "Today, yoga is not just exercise—it’s a life philosophy: making peace with the breath, dancing with the body, and calming the mind.",
+        journey_title: "My Yoga Journey",
+        journey_intro: "In 2015, I sat on a yoga mat for the first time. I went just to stretch… but something inside me changed.",
+        trainings_title: "MY TRAININGS",
+        trainings_list: [
+          "RYT 200 (Registered Yoga Teacher)",
+          "Kids Yoga Certification",
+          "Mindfulness & Meditation Instructor",
+          "Anatomy & Physiology Certification"
+        ],
+        breath_title: "I BELIEVE IN THE POWER OF BREATH",
+        breath_text: "In every class, I aim to teach not just asanas, but awareness, breath knowledge, and inner peace.",
+        kids_title: "Kids Yoga",
+        kids_desc: "My specialized yoga programs for ages 4–12 develop focus, self-confidence, and body awareness through play, storytelling, and breathwork.",
+        kids_cta: "Kids Programs",
+        programs_title: "Yoga with Şeyma: Programs",
+        prog1_title: "Online Group Classes",
+        prog1_desc: "Weekly live sessions — morning energy or evening calm.",
+        prog1_price: "$15/month",
+        prog1_btn: "Join",
+        prog2_title: "Private Sessions",
+        prog2_desc: "Personalized plans, post-injury rehabilitation.",
+        prog2_price: "$25/session",
+        prog2_btn: "Book",
+        prog3_title: "Meditation & Breath Package",
+        prog3_desc: "4-week guided meditation + breath exercises.",
+        prog3_price: "$20",
+        prog3_btn: "Buy",
+        blog_title: "Yoga & Mindfulness Articles",
+        article1_title: "Morning Breath Exercises",
+        article1_desc: "5 ways to start your day with energy.",
+        article2_title: "ADHD in Children and Yoga",
+        article2_desc: "How to build awareness through play?",
+        footer_name: "Şeyma Keskin",
+        footer_tagline: "Yoga • Meditation • Awareness"
+      },
+      tr: {
+        nav_about: "Hakkımda",
+        nav_yoga_journey: "Yoga Yolculuğum",
+        nav_kids: "Çocuklara Yoga",
+        nav_programs: "Programlar",
+        nav_blog: "Makaleler",
+        hero_title: "Merhaba, ben Şeyma",
+        hero_subtitle: "Yoga eğitmeni, meditasyon rehberi ve çocukların farkındalık yolculuğuna eşlik eden bir dostum.",
+        hero_cta: "Programlara Göz At",
+        about_title: "Hakkımda",
+        about_p1: "İstanbul’da doğdum ve büyüdüm. Hayatımın erken dönemlerinde stres, hız ve dışa dönüklük beni tüketmeye başladı. İçime dönmem gerektiğini hissettiğim o dönemde yoga ile tanıştım — ve bu buluşma hayatıma yön verdi.",
+        about_p2: "Bugün, yoga sadece bir egzersiz değil; nefesle barışmak, bedenle dans etmek ve zihni sakinleştirmek için bir yaşam felsefesi.",
+        journey_title: "Yoga ile Tanışmam",
+        journey_intro: "2015 yılında ilk kez bir yoga matına oturdum. O gün, sadece esnemek için gitmiştim… ama içimde bir şey değişti.",
+        trainings_title: "EĞİTİMLERİM",
+        trainings_list: [
+          "RYT 200 (Registered Yoga Teacher)",
+          "Çocuklara Yoga Sertifikası",
+          "Mindfulness & Meditasyon Eğitmenliği",
+          "Anatomi ve Fizyoloji Sertifikası"
+        ],
+        breath_title: "NEFESİN GÜCÜNE İNANIYORUM",
+        breath_text: "Her dersimde, öğrencilerime sadece asana değil; farkındalık, nefes bilgisi ve içsel huzuru aktarmaya çalışıyorum.",
+        kids_title: "Çocuklara Yoga",
+        kids_desc: "4-12 yaş arası çocuklar için özel tasarlanmış yoga programlarım, oyun, hikâye ve nefes egzersizleriyle dikkat, özgüven ve bedensel farkındalığı geliştirir.",
+        kids_cta: "Çocuk Programları",
+        programs_title: "Şeyma ile Yoga: Programlar",
+        prog1_title: "Online Grup Dersleri",
+        prog1_desc: "Haftalık canlı dersler — sabah enerjisi veya akşam sakinliği.",
+        prog1_price: "₺299/ay",
+        prog1_btn: "Katıl",
+        prog2_title: "Bireysel Oturumlar",
+        prog2_desc: "Kişiselleştirilmiş planlar, yaralanma sonrası rehabilitasyon.",
+        prog2_price: "₺450/oturum",
+        prog2_btn: "Rezervasyon",
+        prog3_title: "Meditasyon & Nefes Paketi",
+        prog3_desc: "4 haftalık rehberli meditasyon + nefes egzersizleri.",
+        prog3_price: "₺399",
+        prog3_btn: "Satın Al",
+        blog_title: "Yoga & Farkındalık Yazıları",
+        article1_title: "Sabah Nefes Egzersizleri",
+        article1_desc: "Günü enerjiyle başlatmanın 5 yolu.",
+        article2_title: "Çocuklarda Dikkat Dağınıklığı ve Yoga",
+        article2_desc: "Oyunla farkındalık nasıl kazandırılır?",
+        footer_name: "Şeyma Keskin",
+        footer_tagline: "Yoga • Meditasyon • Farkındalık"
+      }
+    };
+
+    function translate(lang) {
+      document.querySelectorAll('[data-lang]').forEach(el => {
+        const key = el.getAttribute('data-lang');
+        if (!translations[lang][key]) return;
+
+        if (key === 'trainings_list') {
+          const items = el.querySelectorAll('li');
+          translations[lang][key].forEach((text, i) => {
+            if (items[i]) items[i].textContent = text;
+          });
+        } else {
+          el.textContent = translations[lang][key];
+        }
+      });
+      localStorage.setItem('language', lang);
+      document.getElementById('language-switcher').value = lang;
+    }
+
+    function setTheme(theme) {
+      const icon = document.getElementById('theme-icon');
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+        icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />';
+      } else {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+        icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />';
+      }
+    }
+
+    // Sayfa yüklendiğinde
+    document.addEventListener('DOMContentLoaded', () => {
+      // Dil yükle
+      const savedLang = localStorage.getItem('language') || 'tr';
+      translate(savedLang);
+
+      // Tema yükle (önce localStorage, sonra sistem teması)
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        setTheme(savedTheme);
+      } else {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        setTheme(prefersDark ? 'dark' : 'light');
+      }
+
+      // Dinleyiciler
+      document.getElementById('language-switcher').addEventListener('change', (e) => {
+        translate(e.target.value);
+      });
+
+      document.getElementById('theme-toggle').addEventListener('click', () => {
+        const isDark = document.documentElement.classList.contains('dark');
+        setTheme(isDark ? 'light' : 'dark');
+      });
+    });
+  </script>
+</body>
 </html>
